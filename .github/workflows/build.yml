@@ -41,6 +41,16 @@ jobs:
           CertUtil -hashfile VideoFrameExtractor-portable.zip SHA256 >> SHA256SUMS.txt
           cd ..
 
+      - name: Read Release Notes
+        id: release_notes
+        run: |
+          if (Test-Path "docs/release_notes.md") {
+            $notes = Get-Content "docs/release_notes.md" -Raw
+            $notes = $notes -replace "`r`n","%0A"
+            echo "::set-output name=notes::$notes"
+          }
+        shell: pwsh
+
       - name: Create Release
         id: create_release
         uses: softprops/action-gh-release@v1
@@ -55,16 +65,18 @@ jobs:
           body: |
             ## Video Frame Extractor ${{ github.ref_name }}
 
+            ${{ steps.release_notes.outputs.notes }}
+
             ### Installation
-            - Download VideoFrameExtractorSetup.exe for the installer version
-            - Download VideoFrameExtractor-portable.zip for the portable version
+            - Download `VideoFrameExtractor.exe` for the standalone executable
+            - Download `VideoFrameExtractor-portable.zip` for the portable version
 
             ### SHA-256 Checksums
             ```
             ${{ runner.temp }}/SHA256SUMS.txt
             ```
 
-            ### Changes in this version
-            - See the commits for this release: https://github.com/${{ github.repository }}/commits/${{ github.ref_name }}
+            ### Full Changelog
+            https://github.com/${{ github.repository }}/commits/${{ github.ref_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
