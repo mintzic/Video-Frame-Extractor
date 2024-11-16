@@ -2,7 +2,7 @@ import os
 import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
 from video_processor import VideoProcessor, ProcessCancelled
-import config
+import config as config
 import threading
 from queue import Queue
 import time
