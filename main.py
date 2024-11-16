@@ -90,15 +90,15 @@ class AboutDialog:
         github_link.pack(pady=2)
         github_link.bind("<Button-1>", lambda e: webbrowser.open(config.GITHUB_URL))
 
-        website_link = ttk.Label(
-            main_frame,
-            text="Website",
-            cursor="hand2",
-            foreground="blue",
-            justify="center",
-        )
-        website_link.pack(pady=2)
-        website_link.bind("<Button-1>", lambda e: webbrowser.open(config.WEBSITE_URL))
+        # website_link = ttk.Label(
+        #     main_frame,
+        #     text="Website",
+        #     cursor="hand2",
+        #     foreground="blue",
+        #     justify="center",
+        # )
+        # website_link.pack(pady=2)
+        # website_link.bind("<Button-1>", lambda e: webbrowser.open(config.WEBSITE_URL))
 
         # Separator
         ttk.Separator(main_frame, orient="horizontal").pack(fill="x", pady=20)
@@ -402,6 +402,8 @@ class VideoProcessorGUI:
 def main():
     root = tk.Tk()
     app = VideoProcessorGUI(root)
+    icon = tk.PhotoImage(file="./icon.png")
+    root.iconphoto(True, icon)
     root.mainloop()
 
 
