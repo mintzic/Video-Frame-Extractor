@@ -5,7 +5,7 @@
 ![Video Frame Extractor Logo](resources/icon.ico)
 
 [![License](https://img.shields.io/github/license/mintzic/video-frame-extractor)](LICENSE)
-[![Release](https://img.shields.io/github/v/release/mintzic/video-frame-extractor)](https://github.com/yourusername/video-frame-extractor/releases)
+[![Release](https://img.shields.io/github/v/release/mintzic/Video-Frame-Extractor)](https://github.com/mintzic/Video-Frame-Extractor/releases)
 ![Platform](https://img.shields.io/badge/platform-Windows-blue)
 [![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 
