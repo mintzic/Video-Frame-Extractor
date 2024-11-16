@@ -399,11 +399,30 @@ class VideoProcessorGUI:
         thread.start()
 
 
+def get_resource_path(filename):
+    """Get the path to a resource file, works both in development and when packaged"""
+    import os
+    import sys
+
+    if hasattr(sys, "_MEIPASS"):
+        # Running in PyInstaller bundle
+        return os.path.join(sys._MEIPASS, filename)
+    else:
+        # Running in development
+        return os.path.join(os.path.dirname(os.path.abspath(__file__)), filename)
+
+
 def main():
     root = tk.Tk()
     app = VideoProcessorGUI(root)
-    icon = tk.PhotoImage(file="./icon.png")
-    root.iconphoto(True, icon)
+
+    try:
+        # Try to set window icon
+        icon_path = get_resource_path("icon.ico")
+        root.iconbitmap(icon_path)
+    except Exception as e:
+        print(f"Could not load icon: {e}")
+
     root.mainloop()
 
 
