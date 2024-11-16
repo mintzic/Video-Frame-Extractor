@@ -1,6 +1,6 @@
 # Application information
 APP_NAME = "Video Frame Extractor"
-APP_VERSION = "1.0.0"
+APP_VERSION = "1.0.1"
 APP_DESCRIPTION = "A tool for extracting frames from video files at specified intervals.\nSupports multiple video formats and customizable extraction settings."
 
 # Author information
