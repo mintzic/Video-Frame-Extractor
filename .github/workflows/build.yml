@@ -5,12 +5,17 @@ on:
     tags:
       - "v*" # Trigger on version tags
 
+permissions:
+  contents: write # This is required for creating releases
+
 jobs:
   build:
     runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history for tags
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -47,12 +52,11 @@ jobs:
           if (Test-Path "docs/release_notes.md") {
             $notes = Get-Content "docs/release_notes.md" -Raw
             $notes = $notes -replace "`r`n","%0A"
-            echo "::set-output name=notes::$notes"
+            echo "RELEASE_NOTES=$notes" >> $env:GITHUB_OUTPUT
           }
         shell: pwsh
 
       - name: Create Release
-        id: create_release
         uses: softprops/action-gh-release@v1
         with:
           files: |
@@ -65,7 +69,7 @@ jobs:
           body: |
             ## Video Frame Extractor ${{ github.ref_name }}
 
-            ${{ steps.release_notes.outputs.notes }}
+            ${{ steps.release_notes.outputs.RELEASE_NOTES }}
 
             ### Installation
             - Download `VideoFrameExtractor.exe` for the standalone executable
